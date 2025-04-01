@@ -14,7 +14,7 @@ def main():
             timeout=TIMEOUT,
             sleep_seconds=SLEEP_SECONDS
         )
-        output_file_name = replys.run()
+        # output_file_name = replys.run()
         output_file_name="8934153_data.txt"
         # 根据文件中的链接获取详情并保存
         detail_crawler = GetReplyDetail(file_path=output_file_name, timeout=TIMEOUT, sleep_seconds=SLEEP_SECONDS, user_id=user_id)

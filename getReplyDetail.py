@@ -3,7 +3,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from config import *
-
+import os
 class GetReplyDetail:
     def __init__(self, file_path, **kwargs):
         self.file_path = file_path
@@ -59,7 +59,7 @@ class GetReplyDetail:
         """解析 HTML 并提取 gioMsg_R_{identifier} 内容"""
         soup = BeautifulSoup(html_content, 'html.parser')
         target_div = soup.find(id=f'gioMsg_R_{identifier}')
-
+        print(soup)
         if target_div:
             subject_text = target_div.attrs.get('subject')
             
@@ -76,7 +76,7 @@ class GetReplyDetail:
         """处理所有链接，提取所需内容"""
         links = self.read_links_from_file()
         results = []
-        batch_size = 50
+        batch_size = 5
         
         for idx, link in enumerate(links):
             identifier = link.split('#')[-1]
@@ -84,7 +84,7 @@ class GetReplyDetail:
 
             if response_content:
                 extracted_content = self.parse_html_and_extract_content(response_content, identifier)
-
+                print(extracted_content)
                 if extracted_content:
                     results.append(extracted_content)
 
@@ -104,5 +104,4 @@ class GetReplyDetail:
                 f.write(result + '\n')
 
 if __name__ == '__main__':
-    pass
     pass
